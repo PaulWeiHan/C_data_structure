@@ -117,5 +117,69 @@ static rb_node_t * rb_rotate_right(rb_node_t *node, rb_node_t *root)
 	}
 	node->parent = left;
 	return root;
+}
 
+static rb_node_t *rb_insert_rebalance(rb_node_t *node, rb_node_t *root)
+{
+	rb_node_t *parent, *gparent, *uncle, *tmp;
+
+	while((parent = node->parent) && parent->color == RED)
+	{
+		gparent = parent->parent;
+
+		if(parent == gparent->left)
+		{
+			uncle = gparent->right;
+			if(uncle && uncle->color == RED)
+			{
+				uncle->color = BLACK;
+				parent->color = BLACK;
+				gparent->color = RED;
+				node = gparent;
+			}
+			else
+			{
+				if(parent->right == node)
+				{
+					root = rb_rotate_left(parent,root);
+					tmp = parent;
+					parent = node;
+					node = tmp;
+				}
+
+				parent->color = BLACK;
+				gparent->color = RED;
+				root = rb_rotate_right(gparent,root);
+			}
+		}
+		else
+		{
+			uncle = gparent->left;
+			if(uncle && uncle->color ==RED)
+			{
+				uncle->color = BLACK;
+				parent->color = BLACK;
+				gparent->color = RED;
+				node = gparent;
+			}
+			else
+			{
+				if(parent->left == node)
+				{
+					root = rb_rotate_right(parent,root);
+					tmp = parent;
+					parent = node;
+					node = tmp;
+				}
+
+				parent->color = BLACK;
+				gparent->color = RED;
+				root = rb_rotate_left(gparent, root);
+			}
+		}
+	}
+
+	root->color = BLACK;
+
+	return root;
 }
