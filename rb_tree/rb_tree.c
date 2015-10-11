@@ -183,3 +183,13 @@ static rb_node_t *rb_insert_rebalance(rb_node_t *node, rb_node_t *root)
 
 	return root;
 }
+
+static rb_node_t *rb_erase_rebalance(rb_node_t *node, rb_node_t *parent, rb_node_t *root)
+{
+	rb_node_t *other, *left, *right;
+
+	while((!node || node->color == BLACK) && node != root)
+	{
+		
+	}
+}
