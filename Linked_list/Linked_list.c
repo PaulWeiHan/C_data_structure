@@ -54,7 +54,36 @@ int list_ins_next(list_t *list, node_t *element, const void *data)
 
 int list_rem_next(list_t *list, node_t *element, void **data)
 {
+    node_t *old_element;
 
+    if(list_size(list) == 0)
+        return -1;
+
+    if(element == NULL)
+    {
+        *data = list->head->data;
+        old_element = list->head;
+        list->head = list->head->next;
+
+        if(list_size(list) == 1)
+            list->tail = NULL;
+    }
+    else
+    {
+        if(element->next == NULL)
+            return -1;
+        *data = element->next->data;
+        old_element = element->next;
+        element->next = element->next->next;
+
+        if(element->next ==NULL)
+            list->tail == NULL;
+    }
+
+    free (old_element);
+
+    list->size--;
+    return 0;
 }
 
 int main(int argc, char const *argv[])
@@ -62,3 +91,18 @@ int main(int argc, char const *argv[])
 	/* code */
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
