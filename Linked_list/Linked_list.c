@@ -86,15 +86,6 @@ int list_rem_next(list_t *list, node_t *element, void **data)
     return 0;
 }
 
-int main(int argc, char const *argv[])
-{
-	/* code */
-	return 0;
-}
-
-
-
-
 
 
 
