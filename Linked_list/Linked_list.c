@@ -3,13 +3,13 @@
 #include "string.h"
 #include "Linked_list.h"
 
-int list_init(list_t *list, void (*destory)(void *data))
+void list_init(list_t *list, void (*destory)(void *data))
 {
     list->size = 0;
     list->destory = destory;
     list->head = NULL;
     list->tail = NULL;
-    return 0;
+    //return 0;
 }
 
 void list_destroy(list_t *list)
@@ -42,7 +42,7 @@ int list_ins_next(list_t *list, node_t *element, const void *data)
     }
     else
     {
-        if(element_next = NULL)
+        if(element->next == NULL)
             list->tail = element;
         new_element->next = element->next;
         element->next = new_element;
@@ -77,7 +77,7 @@ int list_rem_next(list_t *list, node_t *element, void **data)
         element->next = element->next->next;
 
         if(element->next ==NULL)
-            list->tail == NULL;
+            list->tail = NULL;
     }
 
     free (old_element);

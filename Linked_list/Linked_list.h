@@ -3,14 +3,14 @@
 
 #include "stdlib.h"
 
-typedef node_s node_t;
+typedef struct node_s node_t;
 struct node_s
 {
 	void *data;
 	node_t *next;
 };
 
-typedef list_s list_t;
+typedef struct list_s list_t;
 struct list_s
 {
 	int size;
